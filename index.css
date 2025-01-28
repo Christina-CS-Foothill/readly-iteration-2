@@ -1,3 +1,7 @@
+body {
+  font-family: "Merriweather", sans-serif;
+}
+
 #side-bar {
   height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 100px; /* Set the width of the sidebar */
@@ -8,6 +12,43 @@
   background-color: lightblue; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-left: 5px;
+  padding-right: 5px;
+}
+
+.genres {
+  background-color: lightcyan;
+  box-shadow: 2px 4px 8px rgb(68, 67, 67);
+  border-radius: 8px;
+  list-style: none;
+  padding-left: 5px;
+  display: none;
+}
+
+.genres li {
+  padding: 0;
+  margin-top: 10px;
+}
+
+.browse:hover .genres {
+  display: block;
+}
+
+.community-options {
+  background-color: lightcyan;
+  box-shadow: 2px 4px 8px rgb(68, 67, 67);
+  border-radius: 8px;
+  list-style: none;
+  padding-left: 5px;
+  display: none;
+}
+
+.community-options li {
+  padding: 0;
+  margin-top: 10px;
+}
+
+.community:hover .community-options {
+  display: block;
 }
 
 #main {
@@ -16,12 +57,39 @@
 }
 
 header {
-  background-color: pink;
+  /* background-color: pink; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-#page-logo {
+#page-logo a {
+  margin: 10px;
+  font-size: 50px;
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  /* background-color: red; */
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+}
+
+nav a {
+  text-decoration: none;
+  text-align: center;
+}
+
+nav p {
+  display: none;
+}
+
+nav a:hover p {
+  display: block;
+  font-size: 12px;
+  color: black;
 }
 
 #hero {
