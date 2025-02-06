@@ -133,15 +133,50 @@ nav a:hover p {
   justify-content: space-between;
 }
 
-#actions div {
+#actions a {
+  text-decoration: none;
+  color: black;
   background-color: rgb(255, 254, 254);
   border-radius: 5px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   padding: 5px;
 }
 
+#actions a:hover {
+  background-color: rgb(183, 181, 181);
+}
+
 #stories-authors {
-  background-color: rgb(192, 100, 192);
+  margin: 0;
+}
+
+#stories-authors ul {
+  list-style: none;
+  background-color: rgb(255, 254, 254);
+  border-radius: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px auto;
+  padding-left: 0;
+  width: 400px;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+#stories-authors li {
+  width: 200px;
+  padding: 10px 55px;
+}
+
+#stories-authors li:hover {
+  background-color: rgb(183, 181, 181);
+}
+
+#stories-label {
+  border-right: solid black 1px;
 }
 
 #story-list {
