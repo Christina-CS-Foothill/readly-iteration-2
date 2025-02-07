@@ -4,7 +4,7 @@ body {
 
 #side-bar {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 100px; /* Set the width of the sidebar */
+  width: 150px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -15,44 +15,36 @@ body {
   padding-right: 5px;
 }
 
-.genres {
+.side-bar-actions {
   background-color: rgb(251, 249, 249);
   box-shadow: 2px 4px 8px rgb(68, 67, 67);
   border-radius: 8px;
   list-style: none;
-  padding-left: 5px;
-  display: none;
-}
-
-.genres li {
   padding: 0;
-  margin-top: 10px;
+  display: none;
+  overflow: hidden;
+  margin: 16px;
 }
 
-.browse:hover .genres {
+.side-bar-actions li {
+  padding: 0;
+  margin: 10px;
+}
+
+.side-bar-actions li:hover {
+  color: purple;
+}
+
+.browse:hover .side-bar-actions {
   display: block;
 }
 
-.community-options {
-  background-color: rgb(251, 249, 249);
-  box-shadow: 2px 4px 8px rgb(68, 67, 67);
-  border-radius: 8px;
-  list-style: none;
-  padding-left: 5px;
-  display: none;
-}
-
-.community-options li {
-  padding: 0;
-  margin-top: 10px;
-}
-
-.community:hover .community-options {
+.community:hover .side-bar-actions {
   display: block;
 }
 
 #main {
-  margin-left: 100px; /* Same as the width of the sidebar */
+  margin-left: 150px; /* Same as the width of the sidebar */
   padding: 0px 10px;
 }
 
