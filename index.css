@@ -215,5 +215,15 @@ nav a:hover p {
 }
 
 #footer {
-  background-color: lightcyan;
+  text-align: center;
+  color: grey;
+}
+
+#footer a {
+  text-decoration: none;
+  color: grey;
+}
+
+#footer a:hover {
+  color: black;
 }
