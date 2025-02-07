@@ -171,12 +171,12 @@ nav a:hover p {
   border-right: solid black 1px;
 }
 
-#story-list {
-  /* background-color: lightcoral; */
+/* #story-list {
+  background-color: lightcoral;
 }
 
 #list-of-stories ul {
-}
+} */
 
 .story-list-item {
   list-style: none;
