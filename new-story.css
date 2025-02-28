@@ -1,8 +1,55 @@
 .create-new-story {
   text-align: center;
-  height: 900px;
+  height: 1000px;
 }
 
 .create-new-story p {
   padding-top: 450px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  text-align: left;
+  color: rgb(80, 80, 80);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid grey;
+  resize: none;
+  margin: 0.25rem 0;
+  padding: 0.25rem;
+  font: inherit;
+}
+
+#story-text {
+  height: 600px;
+}
+
+.buttons {
+  text-align: right;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: aliceblue;
+  border-color: aliceblue;
 }

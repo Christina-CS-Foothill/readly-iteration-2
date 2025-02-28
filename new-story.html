@@ -77,7 +77,44 @@
     </header>
 
     <section class="create-new-story">
-      <p>Create New Story (Coming Soon)</p>
+      <form>
+        <ul>
+          <li>
+            <label for="author-name">Author Name:</label>
+            <input type="text" name="author-name" id="author-name" required />
+          </li>
+          <li>
+            <label for="story-title">New Story Title</label>
+            <input type="text" name="story-title" id="story-title" required />
+          </li>
+          <li>
+            <label for="story-summary">Story Summary/Description</label>
+            <textarea rows="5" type="text" name="story-summary" id="story-summary" required></textarea>
+          </li>
+          <li>
+            <label for="genre">Genre</label>
+            <select name="genre" id="genre">
+              <option value="romance">Romance</option>
+              <option value="adventure">Adventure</option>
+              <option value="action">Action</option>
+              <option value="drama">Drama</option>
+              <option value="horror">Horror</option>
+              <option value="comedy">Comedy</option>
+              <option value="other">Other</option>
+            </select>
+          </li>
+          <li>
+            <label for="story-text">Story Text</label>
+            <textarea name="story-text" id="story-text"></textarea>
+          </li>
+        </ul>
+
+        <section class="buttons">
+          <button>Preview</button>
+          <button type="submit">Create/Post</button>
+          <button type="reset">Cancel</button>
+        </section>
+      </form>
     </section>
     <footer id="footer">
       <p>📚 Readly.</p>

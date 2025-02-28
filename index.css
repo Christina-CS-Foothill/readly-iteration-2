@@ -16,6 +16,7 @@ body {
   padding-left: 0.33rem;
   padding-right: 0.33rem;
   font-size: 1rem;
+  color: rgb(40, 39, 39);
 }
 
 .side-bar-actions {
@@ -64,7 +65,7 @@ header {
   margin: 0.625rem;
   font-size: 3.125rem;
   text-decoration: none;
-  color: black;
+  color: rgb(42, 42, 42);
 }
 
 nav {
@@ -218,6 +219,7 @@ nav a:hover p {
 #footer {
   text-align: center;
   color: grey;
+  margin-top: 1px;
 }
 
 #footer a {
@@ -227,4 +229,7 @@ nav a:hover p {
 
 #footer a:hover {
   color: black;
+}
+
+@media (max-width: 768px) {
 }
