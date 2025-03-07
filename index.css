@@ -200,6 +200,8 @@ nav a:hover p {
 
 .story-list-item img {
   height: 150px;
+  width: 150px;
+  object-fit: cover; /*makes sure image won't distort*/
   opacity: 0.8;
   border-radius: 30px;
   box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.5);
@@ -214,6 +216,10 @@ nav a:hover p {
 
 .story-details p {
   color: grey;
+}
+
+.upvotes-views {
+  text-align: right;
 }
 
 #author-list {
@@ -233,6 +239,11 @@ nav a:hover p {
 
 #footer a:hover {
   color: black;
+}
+
+#add-new-story-btn {
+  padding: 0.5rem 1rem;
+  font: inherit;
 }
 
 @media (max-width: 768px) {
