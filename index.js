@@ -7,6 +7,15 @@
  * 6. Display the filled element on the home page
  */
 
+/**
+ * TODO: Repeat steps in first todo but for author objects
+ * 1. Create + display button
+ * 2. Create a list of "Author Objects" that contain all the data needed to fill out a Author element
+ * 3. Create story element
+ * 5. Fill the author element with the data
+ * 6. Display the filled element on the home page
+ */
+
 // story object structure, simplified
 function Story(title, author, storyContent) {
   this.title = title;
@@ -79,12 +88,12 @@ const storyListData = [
 ];
 
 // DOM elements
-const showStoriesBtn = window.document.getElementById("show-stories-btn");
-const showAuthorsBtn = window.document.getElementById("show-authors-btn");
-const addNewStoryBtn = window.document.getElementById("add-new-story-btn");
-const storiesSectionElement = window.document.getElementById("story-list");
+const showStoriesBtn = document.getElementById("show-stories-btn");
+const showAuthorsBtn = document.getElementById("show-authors-btn");
+const addNewStoryBtn = document.getElementById("add-new-story-btn");
+const storiesSectionElement = document.getElementById("story-list");
 const listOfStoriesElement = document.body.querySelector(".list-of-stories");
-const authorsList = window.document.getElementById("author-list");
+const authorsList = document.getElementById("author-list");
 
 //toggle story list visibility
 function showStories(event) {
@@ -144,7 +153,7 @@ function addNewStory(event) {
   listOfStoriesElement.appendChild(listContainer);
 }
 
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 4; i++) {
   addNewStory();
 }
 

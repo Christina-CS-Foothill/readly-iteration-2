@@ -104,7 +104,7 @@ nav a:hover p {
   list-style: none;
   background-color: rgba(206, 206, 206, 0.6);
   border-radius: 10px;
-  top: 12rem;
+  top: 190px;
   display: inline-block;
   padding: 1%;
 }
@@ -179,12 +179,12 @@ nav a:hover p {
   border-right: solid black 1px;
 }
 
-/* #story-list {
-  background-color: lightcoral;
+#story-list {
+  display: block;
 }
 
 #list-of-stories ul {
-} */
+}
 
 .story-list-item {
   list-style: none;
@@ -226,6 +226,82 @@ nav a:hover p {
   display: none;
 }
 
+#author-list ul {
+  list-style: none;
+}
+
+.author-list-item {
+  margin-bottom: 20px;
+  border-bottom: solid rgb(201 193 193) 1px;
+}
+
+.author-list-item a {
+  text-decoration: none;
+}
+
+.author-list-item span:hover {
+  color: purple;
+}
+
+.author-list-item span {
+  font-size: 1.5rem;
+}
+
+.author-name {
+  color: black;
+}
+
+.author-at {
+  color: grey;
+}
+
+.author-intro-div {
+  padding: 10px;
+  border: 1px solid rgb(151, 140, 140);
+  border-radius: 3px;
+}
+
+.brief-intro {
+  display: none;
+}
+
+.long-intro {
+  display: block;
+}
+
+.work-info-div {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.work-info-div p {
+  padding: 10px;
+  margin: 0;
+}
+
+.work-info-div ul {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+}
+
+.work-info-div li {
+  padding: 5px 20px;
+  margin: 0 10px;
+  background-color: rgb(201, 189, 189);
+}
+
+.follow-div {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.follow-div p {
+  padding: 10px;
+  margin: 0;
+}
+
 #footer {
   text-align: center;
   color: grey;
@@ -241,7 +317,7 @@ nav a:hover p {
   color: black;
 }
 
-#add-new-story-btn {
+.home-page-btn {
   padding: 0.5rem 1rem;
   font: inherit;
 }
