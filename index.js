@@ -10,18 +10,11 @@
 /**
  * TODO: Repeat steps in first todo but for author objects
  * 1. Create + display button [x]
- * 2. Create a list of "Author Objects" that contain all the data needed to fill out a Author element []
- * 3. Create story element []
- * 5. Fill the author element with the data []
- * 6. Display the filled element on the home page []
+ * 2. Create a list of "Author Objects" that contain all the data needed to fill out a Author element [x]
+ * 3. Create author element [x]
+ * 5. Fill the author element with the data [x]
+ * 6. Display the filled element on the home page [x]
  */
-
-// story object structure, simplified
-function Story(title, author, storyContent) {
-  this.title = title;
-  this.author = author;
-  this.storyContent = storyContent;
-}
 
 // author object structure, simplified
 function Author(authorName, authorAt, introShort, introLong, favoredGenres) {
@@ -35,70 +28,6 @@ function Author(authorName, authorAt, introShort, introLong, favoredGenres) {
   this.followerCount = 0;
   this.followingCount = 0;
 }
-
-// list of image sources to be randomly picked when new story is "created"
-const storyImageList = [
-  "/images/fantasy-cover.jpg",
-  "/images/romance-cover.png",
-  "/images/adventure-cover.png",
-];
-
-// list of hardcoded story data to randomly choose from
-const storyListData = [
-  new Story(
-    "Death of the One-Toed Goose",
-    "Desmond Hardin",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Rutrum ultrices nostra quis nam consequat " +
-      "lobortis vehicula. Mollis proin ridiculus eu eleifend est eget. Euismod dictum accumsan volutpat " +
-      "venenatis donec porttitor? Sapien litora turpis cursus egestas aenean. Convallis eros per feugiat " +
-      "adipiscing velit, lobortis vitae parturient. Nisi praesent adipiscing pellentesque sem potenti aenean " +
-      "metus per. Aliquet dapibus ligula iaculis libero ligula eu parturient? Adipiscing adipiscing volutpat " +
-      "fusce; adipiscing donec elit potenti eleifend."
-  ),
-  new Story(
-    "Ark Dying",
-    "Mona Mora",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Commodo a nulla tristique odio leo habitasse cubilia. " +
-      "Libero tristique sit dui maximus vehicula in per."
-  ),
-  new Story(
-    "Claw of Exile",
-    "Fidel Mclaughlin",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Dignissim suspendisse a finibus, torquent sodales odio " +
-      "rhoncus. Facilisis sodales tincidunt senectus at enim tortor. Rutrum laoreet pretium; magna lectus turpis quis " +
-      "dolor risus primis."
-  ),
-  new Story(
-    "The Shadow in the Dark City",
-    "Orval Haynes",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit."
-  ),
-  new Story(
-    "The Demon in the Window",
-    "Kathryn Lopez",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Donec placerat gravida platea imperdiet sollicitudin aliquam." +
-      " Netus fusce justo malesuada enim ullamcorper."
-  ),
-  new Story(
-    "Unleash the Fury",
-    "Angela Gilbert",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Pretium interdum sociosqu venenatis aliquam fusce phasellus " +
-      "porta bibendum. Nibh fames himenaeos aptent, faucibus euismod torquent hac. Montes nostra aenean turpis hac erat. " +
-      "In hac lacus venenatis, purus sem lacus lacinia suscipit. Montes accumsan ac augue eros tristique ex dis. Sit amet diam ante felis ipsum."
-  ),
-  new Story(
-    "The Fall of the Empire",
-    "Millie Walter",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Felis tortor class hendrerit sociosqu nullam condimentum " +
-      "mi nulla. Ante mollis litora mattis euismod parturient venenatis porta varius? Nibh ultricies tristique enim " +
-      "semper nunc eros egestas tellus. Dignissim vel litora mi ultricies orci mollis lacus dictum?"
-  ),
-  new Story(
-    "Shard and the Rose",
-    "Ivan Lynn",
-    "Lorem ipsum odor amet, consectetuer adipiscing elit. Viverra curabitur primis, nullam potenti torquent fringilla."
-  ),
-];
 
 // list of hardcoded author data to randomly choose from
 const authorListData = [
@@ -192,11 +121,39 @@ function showAuthors(event) {
 
 //add new story to DOM with randomly selected story data
 function addNewStory(event) {
-  const randomStoryIndex = Math.floor(Math.random() * storyListData.length);
-  const randomImageIndex = Math.floor(Math.random() * storyImageList.length);
+  const randomAuthorFirstNameIndex = Math.floor(
+    Math.random() * authorFirstNames.length
+  );
+  const randomAuthorLastNameIndex = Math.floor(
+    Math.random() * authorLastNames.length
+  );
+  const randomTitleIndex = Math.floor(Math.random() * storyTitles.length);
+  const randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
+  const randomStoryContentIndex = Math.floor(
+    Math.random() * storyContentOptions.length
+  );
   const upvoteCount = Math.floor(Math.random() * 200);
   const viewCount = Math.floor(Math.random() * 2000);
   const todayDate = new Date().toDateString();
+
+  //construct new "story object" here
+  const authorName =
+    authorFirstNames[randomAuthorFirstNameIndex] +
+    " " +
+    authorLastNames[randomAuthorLastNameIndex];
+  const newStoryObj = new Story(
+    authorName,
+    storyTitles[randomTitleIndex],
+    storyImageUrls[randomImageUrlIndex],
+    storyContentOptions[randomStoryContentIndex]
+  );
+  newStoryObj.upvoteCount = upvoteCount;
+  newStoryObj.viewCount = viewCount;
+  newStoryObj.lastUpdated = todayDate;
+
+  //add new "story objects" to storyDataList
+  storyListData.push(newStoryObj);
+  console.log(storyListData);
 
   //create sub html elements
   const listContainer = document.createElement("li");
@@ -215,14 +172,14 @@ function addNewStory(event) {
   //add class names & values
   listContainer.className = "story-list-item";
   storyDetailsContainer.className = "story-details";
-  storyImage.src = storyImageList[randomImageIndex];
+  storyImage.src = newStoryObj.imageUrl;
   upvotesAndViewsContainer.className = "upvotes-views";
-  views.innerText = "👀 views: " + viewCount;
-  upvotes.innerText = "❤️ upvotes: " + upvoteCount;
-  storyTitle.innerText = storyListData[randomStoryIndex].title;
-  storyAuthor.innerText = storyListData[randomStoryIndex].author;
+  views.innerText = "👀 views: " + newStoryObj.viewCount;
+  upvotes.innerText = "❤️ upvotes: " + newStoryObj.upvoteCount;
+  storyTitle.innerText = newStoryObj.title;
+  storyAuthor.innerText = newStoryObj.author;
   lastUpdated.innerText = "Last Updated: " + todayDate;
-  storyContent.innerText = storyListData[randomStoryIndex].storyContent;
+  storyContent.innerText = newStoryObj.storyContent;
 
   //build element
   innerDiv.appendChild(storyTitle);
