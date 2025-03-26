@@ -53,9 +53,9 @@ const storyTitles = [
 
 // list of image sources to be randomly picked when new story is "created"
 const storyImageUrls = [
-  "/images/fantasy-cover.jpg",
-  "/images/romance-cover.png",
-  "/images/adventure-cover.png",
+  "/public/images/fantasy-cover.jpg",
+  "/public/images/romance-cover.png",
+  "/public/images/adventure-cover.png",
 ];
 
 //"stories" to randomly choose from when creating new "story objects"

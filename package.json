@@ -1,0 +1,29 @@
+{
+  "name": "readly",
+  "version": "1.0.0",
+  "description": "This is a simple story sharing app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christina-CS-Foothill/readly-iteration-2.git"
+  },
+  "keywords": [
+    "readly"
+  ],
+  "author": "Christina Hunter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Christina-CS-Foothill/readly-iteration-2/issues"
+  },
+  "homepage": "https://github.com/Christina-CS-Foothill/readly-iteration-2#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

@@ -91,7 +91,7 @@ nav a:hover p {
 }
 
 #hero {
-  background-image: url("/images/bookshelf.png");
+  background-image: url("/public/images/bookshelf.png");
   height: 20rem;
   border-radius: 30px;
   box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.5);
