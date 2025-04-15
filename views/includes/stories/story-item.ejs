@@ -1,0 +1,32 @@
+<li class="story-list-item">
+  <article>
+    <div class="story-details">
+      <img src=<%=story.imageurl %>>
+      <div>
+        <h2>
+          <%= story.storytitle %>
+        </h2>
+        <!-- <p>
+          <%= story.genre %>
+        </p> -->
+        <a href="/user-profile/<%= story.id %>">
+          <%= story.authorname %>
+        </a>
+        <p>
+          <%= "Created: " + story.createdDate %>
+        </p>
+        <p>
+          <%= story.storysummary %>
+        </p>
+      </div>
+    </div>
+    <div class="upvotes-views">
+      <p>
+        <%= "👀 views: " + story.viewcount %>
+      </p>
+      <p>
+        <%= "❤️ upvotes: " + story.upvotecount %>
+      </p>
+    </div>
+  </article>
+</li>

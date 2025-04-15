@@ -22,13 +22,26 @@ app.get("/", function (req, res) {
   const storedStories = JSON.parse(storiesFileData);
   const storedUsers = JSON.parse(usersFileData);
 
-  console.log("Stories: ");
-  console.log(storedStories);
-  console.log("Users: ");
-  console.log(storedUsers);
+  // for (const story of storedStories) {
+  //   const authorId = story.authorid;
+  //   console.log(authorId);
+  //   const author = storedUsers.find((user) => user.id === authorId);
+  //   console.log(author.username);
+  //   story.authorname = author.username;
+  //   story.imageurl = storyImageUrls[randomImageUrlIndex];
+  //   story.upvotecount = upvoteCount;
+  //   story.viewcount = viewCount;
+  //   randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
+  //   upvoteCount = Math.floor(Math.random() * 200);
+  //   viewCount = Math.floor(Math.random() * 2000);
+  // }
 
-  const htmlFilePath = path.join(__dirname, "views", "index.html");
-  res.sendFile(htmlFilePath);
+  // console.log("Stories: ");
+  // console.log(storedStories);
+  // console.log("Users: ");
+  // console.log(storedUsers);
+
+  res.render("index", { stories: storedStories, users: storedUsers });
 });
 
 app.get("/new-story", function (req, res) {
@@ -39,15 +52,36 @@ app.get("/new-story", function (req, res) {
 app.post("/new-story", function (req, res) {
   const newStory = req.body;
   newStory.id = uuid.v4();
-  newStory.createdDate = new Date();
+  newStory.createdDate = new Date().toDateString();
+  //here, generate story image url, random view count and upvote count
+  const storyImageUrls = [
+    "/images/fantasy-cover.jpg",
+    "/images/romance-cover.png",
+    "/images/adventure-cover.png",
+  ];
+  let randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
+  let upvoteCount = Math.floor(Math.random() * 200);
+  let viewCount = Math.floor(Math.random() * 2000);
+  //also, use the given authorId to fetch the authorName, save it to new story object
+  const usersFilePath = path.join(__dirname, "data", "users.json");
+  const usersFileData = fs.readFileSync(usersFilePath);
+  const storedUsers = JSON.parse(usersFileData);
+  const user = storedUsers.find((user) => user.id === newStory.authorid);
 
+  //add relevant data fields to new story obj
+  newStory.authorname = user.username;
+  newStory.imageurl = storyImageUrls[randomImageUrlIndex];
+  newStory.upvotecount = upvoteCount;
+  newStory.viewcount = viewCount;
+
+  //retrieve saved list of stories
   const filePath = path.join(__dirname, "data", "stories.json");
   const fileData = fs.readFileSync(filePath);
   const storedStories = JSON.parse(fileData);
 
-  console.log(newStory);
+  //add new story obj to saved list of stories
+  //console.log(newStory);
   storedStories.push(newStory);
-
   fs.writeFileSync(filePath, JSON.stringify(storedStories));
 
   res.redirect("/new-chapter/" + newStory.id);
@@ -63,7 +97,7 @@ app.get("/new-chapter/:id", function (req, res) {
 app.post("/new-chapter", function (req, res) {
   const newChapter = req.body;
   newChapter.id = uuid.v4();
-  newChapter.createdDate = new Date();
+  newChapter.createdDate = new Date().toDateString();
   // write new chapter creations to the json file.
   const filePath = path.join(__dirname, "data", "chapters.json");
   const fileData = fs.readFileSync(filePath);
@@ -77,7 +111,7 @@ app.post("/new-chapter", function (req, res) {
   res.redirect("/confirm");
 });
 
-app.get("/user-profile", function (req, res) {
+app.get("/user-profile/:id", function (req, res) {
   const htmlFilePath = path.join(__dirname, "views", "user-profile.html");
   res.sendFile(htmlFilePath);
 });
