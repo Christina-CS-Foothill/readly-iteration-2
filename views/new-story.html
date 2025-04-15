@@ -10,7 +10,6 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
-    <script src="/scripts/new-story.js" defer></script>
   </head>
 
   <body>
@@ -78,19 +77,19 @@
       </header>
 
       <section class="create-new-story">
-        <form>
+        <form action="/new-story" method="post">
           <ul>
             <li>
-              <label for="author-name">Author Name:</label>
-              <input type="text" name="author-name" id="author-name" required />
+              <label for="author-name">Author ID:</label>
+              <input type="text" name="authorid" id="author-id" required />
             </li>
             <li>
               <label for="story-title">New Story Title</label>
-              <input type="text" name="story-title" id="story-title" required />
+              <input type="text" name="storytitle" id="story-title" required />
             </li>
             <li>
               <label for="story-summary">Story Summary/Description</label>
-              <textarea rows="5" type="text" name="story-summary" id="story-summary" required></textarea>
+              <textarea rows="5" type="text" name="storysummary" id="story-summary" required></textarea>
             </li>
             <li>
               <label for="genre">Genre</label>
@@ -105,10 +104,10 @@
                 <option value="other">Other</option>
               </select>
             </li>
-            <li>
+            <!-- <li>
               <label for="story-text">Story Text</label>
               <textarea name="story-text" id="story-text"></textarea>
-            </li>
+            </li> -->
           </ul>
 
           <section class="buttons">

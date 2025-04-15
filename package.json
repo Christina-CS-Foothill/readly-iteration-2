@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/Christina-CS-Foothill/readly-iteration-2#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
