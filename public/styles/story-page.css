@@ -1,0 +1,82 @@
+#story-section {
+  text-align: center;
+  border: 1px solid rgb(150, 146, 146);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+}
+
+#story-section img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover; /*makes sure image won't distort*/
+  border-radius: 30px;
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.5);
+  margin: auto;
+  display: block;
+  text-align: center;
+}
+
+#story-section button {
+  display: block;
+  margin: 16px auto;
+}
+
+#story-section h1 {
+  text-decoration: underline;
+  margin: 0;
+}
+#author-name {
+  color: grey;
+  margin: 8px;
+}
+
+#genres-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#genres-list p {
+  padding: 5px 20px;
+  margin: 0 auto 8px auto;
+  background-color: rgb(201, 189, 189);
+  width: fit-content;
+}
+
+#story-details {
+  margin-bottom: 8px;
+}
+
+#story-details span {
+  margin: 8px;
+}
+
+#story-summary {
+  margin: auto;
+  width: 600px;
+}
+
+#story-summary p {
+  margin: 0;
+}
+
+#chapter-section {
+  text-align: center;
+  margin: 50px 16px;
+}
+
+#chapters-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chapter-title {
+  text-decoration: underline;
+}
+
+.chapter-summary {
+  color: rgb(53, 50, 50);
+  width: 600px;
+  margin: auto;
+}

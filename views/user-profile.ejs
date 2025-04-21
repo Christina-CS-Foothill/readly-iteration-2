@@ -75,9 +75,52 @@
           </a>
         </nav>
       </header>
-
       <section class="user-profile">
-        <p>User Profile (Coming Soon)</p>
+        <ul class="list-of-authors">
+          <li class="author-list-item">
+            <article>
+              <a href="">
+                <span class="author-name">
+                  <%= user.username %>
+                    <span class="author-at">
+                      <%= "\(@" + user.username + "\)" %>
+                    </span>
+                </span>
+              </a>
+              <h5 class="date-author-joined">
+                <%= "Date Joined: " + user.joindate %>
+              </h5>
+              <div class="author-intro-div">
+                <button class="home-page-btn">Author Introduction:</button>
+                <p class="brief-intro">Hi my name is Bob and I love to write romance stories!</p>
+                <p class="long-intro">
+                  <%= user.userintro %>
+                </p>
+              </div>
+              <div class="work-info-div">
+                <p>
+                  <%= "# of Works: " + userStories.length %>
+                </p>
+                <p>Favored genres:</p>
+                <ul>
+                  <li>Romance</li>
+                  <li>Drama</li>
+                  <li>Angst</li>
+                </ul>
+              </div>
+              <div class="follow-div">
+                <p>Followers: 45</p>
+                <p>Following: 154</p>
+              </div>
+            </article>
+          </li>
+        </ul>
+
+        <ul class="list-of-stories">
+          <% for(const story of userStories ) { %>
+            <%- include('includes/stories/story-item.ejs', {story: story}) %>
+              <% } %>
+        </ul>
       </section>
       <footer id="footer">
         <p>📚 Readly.</p>

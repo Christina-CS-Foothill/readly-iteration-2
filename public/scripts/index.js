@@ -291,10 +291,10 @@ function addNewAuthor(event) {
   listOfAuthorsElement.appendChild(listContainer);
 }
 
-for (let i = 0; i < 3; i++) {
-  addNewStory();
-  addNewAuthor();
-}
+// for (let i = 0; i < 3; i++) {
+//   addNewStory();
+//   addNewAuthor();
+// }
 
 showStoriesBtn.addEventListener("click", showStories);
 showAuthorsBtn.addEventListener("click", showAuthors);

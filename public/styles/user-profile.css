@@ -1,8 +1,12 @@
-.user-profile {
+/* .user-profile {
   text-align: center;
   height: 900px;
 }
 
 .user-profile p {
   padding-top: 450px;
+} */
+
+.list-of-authors {
+  list-style: none;
 }

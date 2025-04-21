@@ -4,12 +4,14 @@
       <img src=<%=story.imageurl %>>
       <div>
         <h2>
-          <%= story.storytitle %>
+          <a href="/story/<%= story.id %>">
+            <%= story.storytitle %>
+          </a>
         </h2>
         <!-- <p>
           <%= story.genre %>
         </p> -->
-        <a href="/user-profile/<%= story.id %>">
+        <a href="/user-profile/<%= story.authorid %>">
           <%= story.authorname %>
         </a>
         <p>

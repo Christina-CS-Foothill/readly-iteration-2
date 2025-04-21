@@ -87,6 +87,29 @@ app.post("/new-story", function (req, res) {
   res.redirect("/new-chapter/" + newStory.id);
 });
 
+app.get("/story/:id", function (req, res) {
+  //here, display the story + the associated chapters
+  const storyId = req.params.id;
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  const targetStory = storedStories.find((story) => story.id === storyId);
+
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  const targetChapters = storedChapters.filter(
+    (chapter) => chapter.storyId === storyId
+  );
+
+  console.log(targetStory);
+  console.log(targetChapters);
+
+  res.render("story", { story: targetStory, chapters: targetChapters });
+});
+
 app.get("/new-chapter/:id", function (req, res) {
   const authorId = req.params.id;
 
@@ -112,8 +135,29 @@ app.post("/new-chapter", function (req, res) {
 });
 
 app.get("/user-profile/:id", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "user-profile.html");
-  res.sendFile(htmlFilePath);
+  const userId = req.params.id;
+  console.log(userId);
+
+  const usersFilePath = path.join(__dirname, "data", "users.json");
+  const usersFileData = fs.readFileSync(usersFilePath);
+  const storedUsers = JSON.parse(usersFileData);
+
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  const targetUser = storedUsers.find((user) => user.id === userId);
+  const targetUserStories = storedStories.filter(
+    (story) => story.authorid === userId
+  );
+
+  // console.log(targetUser);
+  // console.log(targetUserStories);
+
+  res.render("user-profile", {
+    user: targetUser,
+    userStories: targetUserStories,
+  });
 });
 
 app.get("/create-user", function (req, res) {
