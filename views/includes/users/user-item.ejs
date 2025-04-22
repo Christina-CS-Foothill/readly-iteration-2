@@ -1,0 +1,34 @@
+<li class="author-list-item">
+  <article>
+    <a href="/user-profile/<%= user.id %>">
+      <span class="author-name">
+        <%= user.username %>
+      </span>
+      <span class="author-at">(@<%= user.username %>)</span>
+    </a>
+    <h5 class="date-author-joined">
+      Date Joined: <%= user.joindate %>
+    </h5>
+    <div class="author-intro-div">
+      <button class="home-page-btn">Author Introduction</button>
+      <p class="brief-intro">
+        <%= user.userintro %>
+      </p>
+      <p class="long-intro">
+        <%= user.userintro %>
+      </p>
+    </div>
+    <div class="work-info-div">
+      <p># of Works: <%= stories.filter((story)=> story.authorid === user.id).length %>
+      </p>
+      <p>Favored genres:</p>
+      <ul>
+        <li>???</li>
+      </ul>
+    </div>
+    <div class="follow-div">
+      <p>Followers:</p>
+      <p>Following:</p>
+    </div>
+  </article>
+</li>

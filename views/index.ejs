@@ -218,6 +218,9 @@
                 </div>
               </article>
             </li> -->
+            <% for(user of users) { %>
+              <%- include('includes/users/user-item.ejs', {user: user}) %>
+                <% } %>
           </ul>
         </section>
       </main>
