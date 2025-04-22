@@ -34,12 +34,14 @@
 #genres-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto 8px auto;
+  display: flex;
+  justify-content: center;
 }
 
 #genres-list p {
   padding: 5px 20px;
-  margin: 0 auto 8px auto;
+  margin: 0 8px 0 8px;
   background-color: rgb(201, 189, 189);
   width: fit-content;
 }

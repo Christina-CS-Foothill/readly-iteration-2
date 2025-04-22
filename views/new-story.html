@@ -87,27 +87,53 @@
               <label for="story-title">New Story Title</label>
               <input type="text" name="storytitle" id="story-title" required />
             </li>
+
+            <section class="genre-options">
+              <p>Genre (Choose at least 1)</p>
+              <ul>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="romance" name="genre" value="romance" />
+                  <label for="romance">Romance</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="action" name="genre" value="action" />
+                  <label for="action">Action</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="drama" name="genre" value="drama" />
+                  <label for="drama">Drama</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="horror" name="genre" value="horror" />
+                  <label for="horror">Horror</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="comedy" name="genre" value="comedy" />
+                  <label for="comedy">Comedy</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="angst" name="genre" value="angst" />
+                  <label for="angst">Angst</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="fanfiction" name="genre" value="fanfiction" />
+                  <label for="fanfiction">Fanfiction</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="original" name="genre" value="original" />
+                  <label>Original</label>
+                </li>
+                <li class="form-control-inline">
+                  <input type="checkbox" id="other" name="genre" value="other" />
+                  <label for="other">Other</label>
+                </li>
+              </ul>
+            </section>
+
             <li>
               <label for="story-summary">Story Summary/Description</label>
               <textarea rows="5" type="text" name="storysummary" id="story-summary" required></textarea>
             </li>
-            <li>
-              <label for="genre">Genre</label>
-              <select name="genre" id="genre">
-                <option value="romance">Romance</option>
-                <option value="adventure" selected="selected">Adventure</option>
-                <option value="action">Action</option>
-                <option value="drama">Drama</option>
-                <option value="horror">Horror</option>
-                <option value="comedy">Comedy</option>
-                <option value="angst">Angst</option>
-                <option value="other">Other</option>
-              </select>
-            </li>
-            <!-- <li>
-              <label for="story-text">Story Text</label>
-              <textarea name="story-text" id="story-text"></textarea>
-            </li> -->
           </ul>
 
           <section class="buttons">
@@ -115,6 +141,7 @@
             <button type="submit">Create/Post</button>
             <button type="reset">Cancel</button>
           </section>
+
         </form>
       </section>
       <footer id="footer">

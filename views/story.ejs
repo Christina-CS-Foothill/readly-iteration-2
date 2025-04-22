@@ -86,11 +86,13 @@
           <%= story.authorname %>
         </p>
         <ul id="genres-list">
-          <li>
-            <p>
-              <%= story.genre %>
-            </p>
-          </li>
+          <% for(genre of story.genre) { %>
+            <li>
+              <p>
+                <%= genre %>
+              </p>
+            </li>
+            <% } %>
         </ul>
         <span>Created Date: <%= story.createdDate %> </span>
         <div id="story-details">

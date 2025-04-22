@@ -80,7 +80,7 @@ app.post("/new-story", function (req, res) {
   const storedStories = JSON.parse(fileData);
 
   //add new story obj to saved list of stories
-  //console.log(newStory);
+  console.log(newStory);
   storedStories.push(newStory);
   fs.writeFileSync(filePath, JSON.stringify(storedStories));
 
@@ -104,8 +104,8 @@ app.get("/story/:id", function (req, res) {
     (chapter) => chapter.storyId === storyId
   );
 
-  console.log(targetStory);
-  console.log(targetChapters);
+  // console.log(targetStory);
+  // console.log(targetChapters);
 
   res.render("story", { story: targetStory, chapters: targetChapters });
 });
@@ -136,7 +136,7 @@ app.post("/new-chapter", function (req, res) {
 
 app.get("/user-profile/:id", function (req, res) {
   const userId = req.params.id;
-  console.log(userId);
+  // console.log(userId);
 
   const usersFilePath = path.join(__dirname, "data", "users.json");
   const usersFileData = fs.readFileSync(usersFilePath);
