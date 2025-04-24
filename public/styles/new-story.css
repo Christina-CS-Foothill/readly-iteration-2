@@ -51,6 +51,11 @@ select {
   margin-right: 0.5rem;
 }
 
+.non-editable input {
+  background-color: grey;
+}
+
+
 .buttons {
   text-align: right;
 }

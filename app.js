@@ -160,8 +160,7 @@ app.get("/story/:id", function (req, res) {
 app.get("/new-chapter/:id", function (req, res) {
   const authorId = req.params.id;
 
-  const htmlFilePath = path.join(__dirname, "views", "new-chapter.html");
-  res.sendFile(htmlFilePath);
+  res.render("new-chapter");
 });
 
 app.post("/new-chapter", function (req, res) {
@@ -179,6 +178,49 @@ app.post("/new-chapter", function (req, res) {
   fs.writeFileSync(filePath, JSON.stringify(storedChapters));
 
   res.redirect("/confirm");
+});
+
+app.get("/edit-chapter/:id", function (req, res) {
+  const chapterId = req.params.id;
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  const targetChapter = storedChapters.find(
+    (chapter) => chapter.id === chapterId
+  );
+
+  res.render("edit-chapter", { chapter: targetChapter });
+});
+
+app.post("/edit-chapter/:id", function (req, res) {
+  const chapterId = req.params.id;
+  //load total list of chapter objs
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  //find target chapter to edit
+  const targetChapter = storedChapters.find(
+    (chapter) => chapter.id === chapterId
+  );
+
+  //update target chapter attributes with user input
+  targetChapter.chapterTitle = req.body.chapterTitle;
+  targetChapter.chapterSummary = req.body.chapterSummary;
+  targetChapter.chapterContent = req.body.chapterContent;
+
+  //write changes back into the JSON file
+  fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
+
+  // console.log("Chapter b4 editing:");
+  // console.log(targetChapter);
+  // console.log("chapter after editing:");
+  // console.log(req.body);
+
+  const storyId = targetChapter.storyId;
+
+  res.redirect("/story/" + storyId);
 });
 
 app.get("/user-profile/:id", function (req, res) {

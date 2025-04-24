@@ -5,7 +5,7 @@
     <title>📚 Readly.</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
-    <link rel="stylesheet" href="/styles/edit-story.css">
+    <!-- <link rel="stylesheet" href="/styles/edit-story.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -44,7 +44,7 @@
             <input type="text" name="storytitle" id="story-title" required value="<%= story.storytitle %>" />
           </li>
 
-          <li id="author-info">
+          <li class="non-editable">
             <label>Author:</label>
             <input value="<%= story.authorname %>(<%= story.authorid %>)" readonly />
           </li>
@@ -164,7 +164,7 @@
       <ol>
         <% for(chapter of chapters) { %>
           <li>
-            <a>
+            <a href="/edit-chapter/<%= chapter.id %>">
               <%= chapter.chapterTitle%>
             </a>
           </li>
