@@ -87,6 +87,53 @@ app.post("/new-story", function (req, res) {
   res.redirect("/new-chapter/" + newStory.id);
 });
 
+app.get("/edit-story/:id", function (req, res) {
+  //here, display the story + the associated chapters
+  const storyId = req.params.id;
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  const targetStory = storedStories.find((story) => story.id === storyId);
+
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  const targetChapters = storedChapters.filter(
+    (chapter) => chapter.storyId === storyId
+  );
+
+  res.render("edit-story", { story: targetStory, chapters: targetChapters });
+});
+
+app.post("/edit-story/:id", function (req, res) {
+  const storyId = req.params.id;
+  const newStoryTitle = req.body.storytitle;
+  const newStoryGenreList = req.body.genre;
+  const newStorySummary = req.body.storysummary;
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  const targetStory = storedStories.find((story) => story.id === storyId);
+
+  //update the story data
+  targetStory.storytitle = newStoryTitle;
+  if (typeof newStoryGenreList === "object") {
+    targetStory.genre = newStoryGenreList;
+  } else {
+    targetStory.genre = [newStoryGenreList];
+  }
+  targetStory.storysummary = newStorySummary;
+
+  //save it to JSON file
+  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+
+  //then redirect to story page to see the changes
+  res.redirect("/story/" + storyId);
+});
+
 app.get("/story/:id", function (req, res) {
   //here, display the story + the associated chapters
   const storyId = req.params.id;

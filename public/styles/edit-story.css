@@ -1,0 +1,7 @@
+#author-info input {
+  background-color: grey;
+}
+
+.chapters-to-edit li {
+  display: list-item;
+}
