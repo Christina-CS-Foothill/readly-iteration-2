@@ -77,8 +77,8 @@
       </header>
 
       <section id="story-section">
-        <img src="<%= story.imageurl %>">
         <a href="/edit-story/<%= story.id %>">Edit Story</a>
+        <img src="<%= story.imageurl %>">
         <h1 id="story-title">
           <%= story.storytitle %>
         </h1>
@@ -136,6 +136,8 @@
                   </article>
                 </li>
                 <% } %>
+                  <hr>
+                  <a href="/new-chapter/<%= story.id %>">Add new chapter</a>
                   <% } %>
         </ul>
       </section>

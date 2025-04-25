@@ -158,9 +158,16 @@ app.get("/story/:id", function (req, res) {
 });
 
 app.get("/new-chapter/:id", function (req, res) {
-  const authorId = req.params.id;
+  const storyId = req.params.id;
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
 
-  res.render("new-chapter");
+  const targetStory = storedStories.find((story) => story.id === storyId);
+
+  //load the story obj
+
+  res.render("new-chapter", { story: targetStory });
 });
 
 app.post("/new-chapter", function (req, res) {

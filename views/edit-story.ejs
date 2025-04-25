@@ -11,6 +11,13 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:wght@400;900&display=swap"
       rel="stylesheet">
+    <script>
+      let goBack = function () {
+        if (confirm("Are you sure? All your changes will be discarded.")) {
+          history.back();
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -154,7 +161,7 @@
 
         <section class="buttons">
           <button type="submit">Save/Update</button>
-          <button type="reset">Cancel</button>
+          <button type="button" onclick="goBack()">Cancel</button>
         </section>
       </form>
     </section>

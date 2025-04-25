@@ -10,6 +10,13 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
+    <script>
+      let goBack = function () {
+        if (confirm("Are you sure? All data entered in this page will be discarded.")) {
+          history.back();
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -143,7 +150,7 @@
           <section class="buttons">
             <button>Preview</button>
             <button type="submit">Create/Post</button>
-            <button type="reset">Cancel</button>
+            <button type="button" onclick="goBack()">Cancel</button>
           </section>
 
         </form>

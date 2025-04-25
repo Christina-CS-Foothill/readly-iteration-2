@@ -7,11 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New Chapter</title>
     <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/new-story.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:wght@400;900&display=swap"
       rel="stylesheet">
+    <script>
+      let goBack = function () {
+        if (confirm("Are you sure? All data entered in this page will be discarded.")) {
+          history.back();
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -82,29 +90,37 @@
           </a>
         </nav>
       </header>
+      <h2>Post New Chapter</h2>
+      <p>
+        <%= story.storytitle %>
+      </p>
       <form action="/new-chapter" method="post">
-        <div>
-          <label for="storyId">Story ID: </label>
-          <input type="text" id="storyId" name="storyId">
-        </div>
-        <div>
-          <label for="username">Chapter Title: </label>
-          <input type="text" id="chapterTitle" name="chapterTitle">
-        </div>
-        <div>
-          <label for="chapterNumber">Chapter Number: </label>
-          <input type="number" id="chapterNumber" name="chapterNumber">
-        </div>
-        <div>
-          <label for="chapterSummary">Chapter Summary: </label>
-          <textarea id="chapterSummary" name="chapterSummary" rows="5"></textarea>
-        </div>
-        <div>
-          <label for="chapterContent">Chapter Content: </label>
-          <textarea id="chapterContent" name="chapterContent" rows="10"></textarea>
-        </div>
-        <button type="reset">Cancel</button>
-        <button>Submit</button>
+        <ul>
+          <li class="non-editable">
+            <label for="storyId">Story ID: </label>
+            <input type="text" id="storyId" name="storyId" value="<%= story.id %>" readonly>
+          </li>
+          <li>
+            <label for="username">Chapter Title: </label>
+            <input type="text" id="chapterTitle" name="chapterTitle">
+          </li>
+          <li>
+            <label for="chapterNumber">Chapter Number: </label>
+            <input type="number" id="chapterNumber" name="chapterNumber" required>
+          </li>
+          <li>
+            <label for="chapterSummary">Chapter Summary: </label>
+            <textarea id="chapterSummary" name="chapterSummary" rows="5" required></textarea>
+          </li>
+          <li>
+            <label for="chapterContent">Chapter Content: </label>
+            <textarea id="chapterContent" name="chapterContent" rows="10" required></textarea>
+          </li>
+        </ul>
+        <section class="buttons">
+          <button type="submit">Post</button>
+          <button type="button" onclick="goBack()">Cancel</button>
+        </section>
       </form>
     </main>
   </body>
