@@ -51,6 +51,7 @@ app.get("/new-story", function (req, res) {
 
 app.post("/new-story", function (req, res) {
   const newStory = req.body;
+  console.log(newStory);
   newStory.id = uuid.v4();
   newStory.createdDate = new Date().toDateString();
   //here, generate story image url, random view count and upvote count
@@ -73,6 +74,11 @@ app.post("/new-story", function (req, res) {
   newStory.imageurl = storyImageUrls[randomImageUrlIndex];
   newStory.upvotecount = upvoteCount;
   newStory.viewcount = viewCount;
+
+  //check if only one genre was selected
+  if (typeof newStory.genre !== "object") {
+    newStory.genre = [newStory.genre];
+  }
 
   //retrieve saved list of stories
   const filePath = path.join(__dirname, "data", "stories.json");
@@ -277,6 +283,41 @@ app.post("/create-user", function (req, res) {
   fs.writeFileSync(filePath, JSON.stringify(storedUsers));
 
   res.redirect("/confirm");
+});
+
+app.get("/edit-user/:id", function (req, res) {
+  const userId = req.params.id;
+  //retrieve user data
+  const usersFilePath = path.join(__dirname, "data", "users.json");
+  const usersFileData = fs.readFileSync(usersFilePath);
+  const storedUsers = JSON.parse(usersFileData);
+  //filter out the target user
+  const targetUser = storedUsers.find((user) => user.id === userId);
+  //send data back to rendered page
+  res.render("edit-user", { user: targetUser });
+});
+
+app.post("/edit-user/:id", function (req, res) {
+  //retrieve user data
+  const userId = req.params.id;
+  const usersFilePath = path.join(__dirname, "data", "users.json");
+  const usersFileData = fs.readFileSync(usersFilePath);
+  const storedUsers = JSON.parse(usersFileData);
+
+  //filter out the target user
+  const targetUser = storedUsers.find((user) => user.id === userId);
+
+  //save changes/edits to the target user
+  targetUser.username = req.body.username;
+  targetUser.password = req.body.password;
+  targetUser.userintro = req.body.userintro;
+  // console.log(targetUser);
+
+  //write changes back to json file
+  fs.writeFileSync(usersFilePath, JSON.stringify(storedUsers));
+
+  //redirect back to user profile page
+  res.redirect("/user-profile/" + userId);
 });
 
 app.get("/confirm", function (req, res) {
