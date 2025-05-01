@@ -44,9 +44,9 @@ app.get("/", function (req, res) {
   res.render("index", { stories: storedStories, users: storedUsers });
 });
 
-app.get("/new-story", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "new-story.html");
-  res.sendFile(htmlFilePath);
+app.get("/new-story/:id", function (req, res) {
+  const userId = req.params.id;
+  res.render("new-story", { userId: userId });
 });
 
 app.post("/new-story", function (req, res) {
@@ -90,7 +90,7 @@ app.post("/new-story", function (req, res) {
   storedStories.push(newStory);
   fs.writeFileSync(filePath, JSON.stringify(storedStories));
 
-  res.redirect("/new-chapter/" + newStory.id);
+  res.redirect("/story/" + newStory.id);
 });
 
 app.get("/edit-story/:id", function (req, res) {
@@ -178,6 +178,7 @@ app.get("/new-chapter/:id", function (req, res) {
 
 app.post("/new-chapter", function (req, res) {
   const newChapter = req.body;
+  const storyId = req.body.storyId;
   newChapter.id = uuid.v4();
   newChapter.createdDate = new Date().toDateString();
   // write new chapter creations to the json file.
@@ -190,7 +191,7 @@ app.post("/new-chapter", function (req, res) {
 
   fs.writeFileSync(filePath, JSON.stringify(storedChapters));
 
-  res.redirect("/confirm");
+  res.redirect("/story/" + storyId);
 });
 
 app.get("/edit-chapter/:id", function (req, res) {
@@ -233,6 +234,32 @@ app.post("/edit-chapter/:id", function (req, res) {
 
   const storyId = targetChapter.storyId;
 
+  res.redirect("/story/" + storyId);
+});
+
+app.get("/delete-chapter/:storyId/:chapterId", function (req, res) {
+  const chapterId = req.params.chapterId;
+  const storyId = req.params.storyId;
+
+  //load all chapters
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  //find index of the target chapter to delete
+  const targetIndex = storedChapters.findIndex(
+    (chapter) => chapter.id === chapterId
+  );
+
+  //delete it using splice
+  // console.log("the index of the chapter is: " + targetIndex);
+  storedChapters.splice(targetIndex, 1);
+
+  //write edited chapter list back to json
+  fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
+  // console.log(storedChapters);
+
+  //redirect to story page
   res.redirect("/story/" + storyId);
 });
 
@@ -282,7 +309,7 @@ app.post("/create-user", function (req, res) {
 
   fs.writeFileSync(filePath, JSON.stringify(storedUsers));
 
-  res.redirect("/confirm");
+  res.redirect("/user-profile/" + newId);
 });
 
 app.get("/edit-user/:id", function (req, res) {

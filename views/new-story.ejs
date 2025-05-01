@@ -86,9 +86,9 @@
       <section class="create-new-story">
         <form action="/new-story" method="post">
           <ul>
-            <li>
+            <li class="non-editable">
               <label for="author-name">Author ID:</label>
-              <input type="text" name="authorid" id="author-id" required />
+              <input type="text" name="authorid" id="author-id" value="<%= userId %>" readonly />
             </li>
             <li>
               <label for="story-title">New Story Title</label>
@@ -148,7 +148,6 @@
           </ul>
 
           <section class="buttons">
-            <button>Preview</button>
             <button type="submit">Create/Post</button>
             <button type="button" onclick="goBack()">Cancel</button>
           </section>

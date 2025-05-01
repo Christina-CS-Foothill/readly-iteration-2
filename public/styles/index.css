@@ -322,5 +322,23 @@ nav a:hover p {
   font: inherit;
 }
 
+.link-button {
+  margin-bottom: 16px;
+}
+
+.link-button a {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid grey;
+  border-radius: 3px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.link-button a:hover {
+  background-color: aliceblue;
+  border-color: aliceblue;
+}
+
 @media (max-width: 768px) {
 }

@@ -87,9 +87,9 @@
                     </span>
                 </span>
               </a>
-              <p>
+              <div class="link-button">
                 <a href="/edit-user/<%= user.id %>">Edit User</a>
-              </p>
+              </div>
               <h5 class="date-author-joined">
                 <%= "Date Joined: " + user.joindate %>
               </h5>
@@ -117,6 +117,9 @@
               </div>
             </article>
           </li>
+          <div class="link-button">
+            <a href="/new-story/<%= user.id %>">Create New Story</a>
+          </div>
         </ul>
 
         <ul class="list-of-stories">
