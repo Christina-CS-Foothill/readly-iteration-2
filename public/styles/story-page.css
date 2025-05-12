@@ -25,17 +25,22 @@
 
 #story-section h1 {
   text-decoration: underline;
-  margin: 0;
+  margin: 8px;
 }
+
 #author-name {
   color: grey;
-  margin: 8px;
+  text-decoration: none;
+}
+
+#author-name:hover {
+  color: black;
 }
 
 #genres-list {
   list-style: none;
   padding: 0;
-  margin: 0 auto 8px auto;
+  margin: 8px auto 8px auto;
   display: flex;
   justify-content: center;
 }

@@ -163,6 +163,61 @@ app.get("/story/:id", function (req, res) {
   res.render("story", { story: targetStory, chapters: targetChapters });
 });
 
+app.get("/delete-story/:id", function (req, res) {
+  const storyId = req.params.id;
+
+  //load all stories
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  //load all chapters
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  //find target story
+  const targetStory = storedStories.find((story) => story.id === storyId);
+
+  //get user/author id from target story
+  const authorId = targetStory.authorid;
+
+  //find target chapters
+  const targetChapters = storedChapters.filter(
+    (chapter) => chapter.storyId === storyId
+  );
+
+  //delete story chapters
+  for (targetChapter of targetChapters) {
+    //find index of the target chapter to delete
+    const targetIndex = storedChapters.findIndex(
+      (chapter) => chapter.id === targetChapter.id
+    );
+
+    //delete it using splice
+    //console.log("the index of the chapter is: " + targetIndex);
+    storedChapters.splice(targetIndex, 1);
+  }
+  // console.log("CHAPTERS");
+  // console.log(storedChapters);
+
+  //delete story
+  const targetStoryIndex = storedStories.findIndex(
+    (story) => story.id === targetStory.id
+  );
+  storedStories.splice(targetStoryIndex, 1);
+  // console.log("STORIES");
+  // console.log(storedStories);
+
+  //rewrite updated stories list to json
+  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+  //rewrite updated chapters list to json
+  fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
+
+  //redirect to user profile since story no longer exists
+  res.redirect("/user-profile/" + authorId);
+});
+
 app.get("/new-chapter/:id", function (req, res) {
   const storyId = req.params.id;
   const storiesFilePath = path.join(__dirname, "data", "stories.json");
@@ -345,6 +400,76 @@ app.post("/edit-user/:id", function (req, res) {
 
   //redirect back to user profile page
   res.redirect("/user-profile/" + userId);
+});
+
+app.get("/delete-user/:id", function (req, res) {
+  const userId = req.params.id;
+
+  //load all users
+  const usersFilePath = path.join(__dirname, "data", "users.json");
+  const usersFileData = fs.readFileSync(usersFilePath);
+  const storedUsers = JSON.parse(usersFileData);
+
+  //load all stories
+  const storiesFilePath = path.join(__dirname, "data", "stories.json");
+  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const storedStories = JSON.parse(storiesFileData);
+
+  //load all chapters
+  const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
+  const chaptersFileData = fs.readFileSync(chaptersFilePath);
+  const storedChapters = JSON.parse(chaptersFileData);
+
+  //find target user
+  const targetUser = storedUsers.find((user) => user.id === userId);
+
+  //find target stories
+  const targetUserStories = storedStories.filter(
+    (story) => story.authorid === userId
+  );
+
+  //find target chapters
+  let targetUserChapters = [];
+  for (story of targetUserStories) {
+    const storyChapters = storedChapters.filter(
+      (chapter) => chapter.storyId === story.id
+    );
+    targetUserChapters = targetUserChapters.concat(storyChapters);
+  }
+
+  // console.log("all user chapters:");
+  // console.log(targetUserChapters);
+
+  //delete target chapters
+  for (chapter of targetUserChapters) {
+    const targetIndex = storedChapters.findIndex(
+      (storedChapter) => storedChapter.id === chapter.id
+    );
+    // console.log(targetIndex);
+    storedChapters.splice(targetIndex, 1);
+  }
+
+  //delete target stories
+  for (story of targetUserStories) {
+    const targetIndex = storedStories.findIndex(
+      (storedStory) => storedStory.id === story.id
+    );
+    storedStories.splice(targetIndex, 1);
+  }
+
+  //delete target user
+  const targetIndex = storedUsers.findIndex(
+    (user) => user.id === targetUser.id
+  );
+  storedUsers.splice(targetIndex, 1);
+
+  //write updated arrays back to JSON files
+  fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
+  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+  fs.writeFileSync(usersFilePath, JSON.stringify(storedUsers));
+
+  //redirect back to homepage
+  res.redirect("/");
 });
 
 app.get("/confirm", function (req, res) {

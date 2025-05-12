@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/story-page.css">
   </head>
+  <script>
+    let warnBeforeChapterDeletion = function (chapterId) {
+      if (confirm("Are you sure? You cannot recover this chapter or its associated data once it is deleted.")) {
+        document.getElementById("delete-chapter-btn-" + chapterId).click();
+      } else {
+        console.log("you canceled deletion of chapter: " + chapterId);
+      }
+    }
+
+    let warnBeforeStoryDeletion = function (storyId) {
+      if (confirm("Are you sure? You cannot recover this story or its associated data(i.e. chapters) once it is deleted.")) {
+        document.getElementById("delete-story-btn-" + storyId).click();
+      } else {
+        console.log("you canceled deletion of story: " + storyId);
+      }
+    }
+  </script>
 
   <body>
 
@@ -79,14 +96,16 @@
       <section id="story-section">
         <div class="link-button">
           <a href="/edit-story/<%= story.id %>">Edit Story</a>
+          <a onclick="warnBeforeStoryDeletion('<%= story.id %>')">Delete Story</a>
+          <a class="secret-btn" id="delete-story-btn-<%= story.id %>" href="/delete-story/<%= story.id %>"></a>
         </div>
         <img src="<%= story.imageurl %>">
         <h1 id="story-title">
           <%= story.storytitle %>
         </h1>
-        <p id="author-name">
+        <a id="author-name" href="/user-profile/<%= story.authorid %>">
           <%= story.authorname %>
-        </p>
+        </a>
         <ul id="genres-list">
           <% for(genre of story.genre) { %>
             <li>
@@ -128,7 +147,9 @@
                     </p>
                     <div class="link-button">
                       <a href="/edit-chapter/<%= chapter.id %>">Edit Chapter</a>
-                      <a href="/delete-chapter/<%= story.id %>/<%= chapter.id %>">Delete Chapter</a>
+                      <a onclick="warnBeforeChapterDeletion('<%= chapter.id %>')">Delete Chapter</a>
+                      <a id="delete-chapter-btn-<%= chapter.id %>"
+                        href="/delete-chapter/<%= story.id %>/<%= chapter.id %>" class="secret-btn"></a>
                     </div>
                     <div class="chapter-summary">
                       <p>Summary:</p>

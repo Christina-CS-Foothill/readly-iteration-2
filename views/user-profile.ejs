@@ -10,6 +10,16 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/user-profile.css">
+    <script>
+      let warnBeforeUserDeletion = function (userId) {
+        if (confirm("Are you sure? You will not be able to recover this user or their associated data(i.e. stories & chapters) once they are deleted.")) {
+          console.log("you want to delete user: " + userId);
+          document.getElementById("delete-user-btn-" + userId).click();
+        } else {
+          console.log("you canceled deletion of user: " + userId);
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -89,6 +99,8 @@
               </a>
               <div class="link-button">
                 <a href="/edit-user/<%= user.id %>">Edit User</a>
+                <a onclick="warnBeforeUserDeletion('<%= user.id %>')">Delete User</a>
+                <a class="secret-btn" id="delete-user-btn-<%= user.id %>" href="/delete-user/<%= user.id %>"></a>
               </div>
               <h5 class="date-author-joined">
                 <%= "Date Joined: " + user.joindate %>

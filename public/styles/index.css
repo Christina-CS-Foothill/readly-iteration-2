@@ -340,5 +340,9 @@ nav a:hover p {
   border-color: aliceblue;
 }
 
+.secret-btn {
+  display: none;
+}
+
 @media (max-width: 768px) {
 }
