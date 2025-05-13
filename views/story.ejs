@@ -32,148 +32,92 @@
   <body>
 
     <!-- Side navigation -->
-    <section id="side-bar">
-      <div class="browse">
-        <p>Browse</p>
-        <ul class="side-bar-actions">
-          <li>
-            <a>Genre 1</a>
-          </li>
-          <li>
-            <a>Genre 2</a>
-          </li>
-          <li>
-            <a>Genre 3</a>
-          </li>
-          <li>
-            <a>Genre 4</a>
-          </li>
-          <li>
-            <a>
-              Genre 5
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="community">
-        <p>Community</p>
-        <ul class="side-bar-actions">
-          <li>
-            <a>Authors</a>
-          </li>
-          <li>
-            <a>Groups</a>
-          </li>
-          <li>
-            <a>Events</a>
-          </li>
-        </ul>
-      </div>
-    </section>
+    <%- include('includes/sidebar.ejs') %>
 
-    <section id="main">
-      <header id="header">
-        <div id="page-logo">
-          <a href="/">📚 Readly.</a>
-        </div>
-        <nav>
-          <a href="/new-story">
-            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
-              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-            </svg>
-            <p class="hide">New Story</p>
-          </a>
-          <a href="user-profile">
-            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
-              <path
-                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z" />
-            </svg>
-            <p class="hide">User Profile</p>
-          </a>
-        </nav>
-      </header>
+      <section id="main">
+        <%- include("includes/header.ejs") %>
 
-      <section id="story-section">
-        <div class="link-button">
-          <a href="/edit-story/<%= story.id %>">Edit Story</a>
-          <a onclick="warnBeforeStoryDeletion('<%= story.id %>')">Delete Story</a>
-          <a class="secret-btn" id="delete-story-btn-<%= story.id %>" href="/delete-story/<%= story.id %>"></a>
-        </div>
-        <img src="<%= story.imageurl %>">
-        <h1 id="story-title">
-          <%= story.storytitle %>
-        </h1>
-        <a id="author-name" href="/user-profile/<%= story.authorid %>">
-          <%= story.authorname %>
-        </a>
-        <ul id="genres-list">
-          <% for(genre of story.genre) { %>
-            <li>
-              <p>
-                <%= genre %>
-              </p>
-            </li>
-            <% } %>
-        </ul>
-        <span>Created Date: <%= story.createdDate %> </span>
-        <div id="story-details">
-          <span>Upvotes: <%= story.upvotecount %> </span>
-          <span>Views: <%= story.viewcount %> </span>
-        </div>
-        <div id="story-summary">
-          <p>Summary</p>
-          <hr>
-          <p>
-            <%= story.storysummary %>
-          </p>
-        </div>
-      </section>
-
-      <section id="chapter-section">
-        <ul id="chapters-list">
-          <% if( chapters.length < 1) { %>
-            <div>
-              <h1>No chapters added yet? Add one to get your story started!</h1>
-              <div class="link-button">
-                <a href="/new-chapter/<%= story.id %>">Add new chapter</a>
-              </div>
+          <section id="story-section">
+            <div class="link-button">
+              <a href="/edit-story/<%= story.id %>">Edit Story</a>
+              <a onclick="warnBeforeStoryDeletion('<%= story.id %>')">Delete Story</a>
+              <a class="secret-btn" id="delete-story-btn-<%= story.id %>" href="/delete-story/<%= story.id %>"></a>
             </div>
-            <% } else { %>
-              <% for (chapter of chapters) { %>
+            <img src="<%= story.imageurl %>">
+            <h1 id="story-title">
+              <%= story.storytitle %>
+            </h1>
+            <a id="author-name" href="/user-profile/<%= story.authorid %>">
+              <%= story.authorname %>
+            </a>
+            <ul id="genres-list">
+              <% for(genre of story.genre) { %>
                 <li>
-                  <article>
-                    <p class="chapter-title">
-                      Chapter <%= chapter.chapterNumber %>: <%= chapter.chapterTitle %>
-                    </p>
-                    <div class="link-button">
-                      <a href="/edit-chapter/<%= chapter.id %>">Edit Chapter</a>
-                      <a onclick="warnBeforeChapterDeletion('<%= chapter.id %>')">Delete Chapter</a>
-                      <a id="delete-chapter-btn-<%= chapter.id %>"
-                        href="/delete-chapter/<%= story.id %>/<%= chapter.id %>" class="secret-btn"></a>
-                    </div>
-                    <div class="chapter-summary">
-                      <p>Summary:</p>
-                      <hr>
-                      <p>
-                        <%= chapter.chapterSummary %>
-                      </p>
-                    </div>
-                    <p>
-                      <%= chapter.chapterContent %>
-                    </p>
-                    <form method="delete">
-                    </form>
-                  </article>
+                  <p>
+                    <%= genre %>
+                  </p>
                 </li>
                 <% } %>
-                  <hr>
+            </ul>
+            <span>Created Date: <%= story.createdDate %> </span>
+            <div id="story-details">
+              <span>Upvotes: <%= story.upvotecount %> </span>
+              <span>Views: <%= story.viewcount %> </span>
+            </div>
+            <div id="story-summary">
+              <p>Summary</p>
+              <hr>
+              <p>
+                <%= story.storysummary %>
+              </p>
+            </div>
+          </section>
+
+          <section id="chapter-section">
+            <ul id="chapters-list">
+              <% if( chapters.length < 1) { %>
+                <div>
+                  <h1>No chapters added yet? Add one to get your story started!</h1>
                   <div class="link-button">
                     <a href="/new-chapter/<%= story.id %>">Add new chapter</a>
                   </div>
-                  <% } %>
-        </ul>
+                </div>
+                <% } else { %>
+                  <% for (chapter of chapters) { %>
+                    <li>
+                      <article>
+                        <p class="chapter-title">
+                          Chapter <%= chapter.chapterNumber %>: <%= chapter.chapterTitle %>
+                        </p>
+                        <div class="link-button">
+                          <a href="/edit-chapter/<%= chapter.id %>">Edit Chapter</a>
+                          <a onclick="warnBeforeChapterDeletion('<%= chapter.id %>')">Delete Chapter</a>
+                          <a id="delete-chapter-btn-<%= chapter.id %>"
+                            href="/delete-chapter/<%= story.id %>/<%= chapter.id %>" class="secret-btn"></a>
+                        </div>
+                        <div class="chapter-summary">
+                          <p>Summary:</p>
+                          <hr>
+                          <p>
+                            <%= chapter.chapterSummary %>
+                          </p>
+                        </div>
+                        <p>
+                          <%= chapter.chapterContent %>
+                        </p>
+                        <form method="delete">
+                        </form>
+                      </article>
+                    </li>
+                    <% } %>
+                      <hr>
+                      <div class="link-button">
+                        <a href="/new-chapter/<%= story.id %>">Add new chapter</a>
+                      </div>
+                      <% } %>
+            </ul>
+          </section>
       </section>
-    </section>
   </body>
 
 </html>

@@ -72,7 +72,8 @@ nav {
   /* background-color: red; */
   display: flex;
   justify-content: space-between;
-  width: 5.625rem;
+  /* width: 5.625rem; */
+  margin-right: 12px;
 }
 
 nav a {

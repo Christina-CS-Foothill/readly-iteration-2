@@ -345,8 +345,9 @@ app.get("/user-profile/:id", function (req, res) {
 });
 
 app.get("/create-user", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "create-user.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "create-user.html");
+  // res.sendFile(htmlFilePath);
+  res.render("create-user");
 });
 
 app.post("/create-user", function (req, res) {
