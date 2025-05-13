@@ -31,7 +31,7 @@
             </div>
             <div>
               <label for="joindate">Join Date: </label>
-              <input type="date" id="joindate" name="joindate" value="2025-03-28" min="2023-01-01" max="2025-12-31">
+              <input type="date" id="joindate" name="joindate" min="2023-01-01" max="2025-12-31">
             </div>
             <div>
               <label for="userintro">User Introduction: </label>
@@ -41,11 +41,7 @@
             <button>Submit</button>
           </form>
       </main>
-
-      <footer id="footer">
-        <p>📚 Readly.</p>
-        <a href="https://github.com/christina-cs-foothill" target="_blank">(Christina Hunter)</a>
-      </footer>
+      <%- include("includes/footer.ejs") %>
   </body>
 
 </html>
