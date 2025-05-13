@@ -5,3 +5,29 @@
 .chapters-to-edit li {
   display: list-item;
 }
+
+#image-previews div {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#image-previews article {
+  text-align: center;
+}
+
+img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover; /*makes sure image won't distort*/
+  opacity: 0.8;
+  border-radius: 20px;
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.5);
+  margin: 20px;
+}
+
+img:hover {
+  height: 150px;
+  width: 150px;
+}

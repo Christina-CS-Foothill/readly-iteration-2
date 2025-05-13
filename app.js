@@ -54,13 +54,15 @@ app.post("/new-story", function (req, res) {
   console.log(newStory);
   newStory.id = uuid.v4();
   newStory.createdDate = new Date().toDateString();
+
   //here, generate story image url, random view count and upvote count
-  const storyImageUrls = [
-    "/images/fantasy-cover.jpg",
-    "/images/romance-cover.png",
-    "/images/adventure-cover.png",
-  ];
-  let randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
+  // const storyImageUrls = [
+  //   "/images/fantasy-cover.jpg",
+  //   "/images/romance-cover.png",
+  //   "/images/adventure-cover.png",
+  // ];
+  // let randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
+
   let upvoteCount = Math.floor(Math.random() * 200);
   let viewCount = Math.floor(Math.random() * 2000);
   //also, use the given authorId to fetch the authorName, save it to new story object
@@ -71,7 +73,7 @@ app.post("/new-story", function (req, res) {
 
   //add relevant data fields to new story obj
   newStory.authorname = user.username;
-  newStory.imageurl = storyImageUrls[randomImageUrlIndex];
+  // newStory.imageurl = storyImageUrls[randomImageUrlIndex];
   newStory.upvotecount = upvoteCount;
   newStory.viewcount = viewCount;
 
@@ -117,6 +119,7 @@ app.post("/edit-story/:id", function (req, res) {
   const storyId = req.params.id;
   const newStoryTitle = req.body.storytitle;
   const newStoryGenreList = req.body.genre;
+  const newStoryImageUrl = req.body.imageurl;
   const newStorySummary = req.body.storysummary;
   const storiesFilePath = path.join(__dirname, "data", "stories.json");
   const storiesFileData = fs.readFileSync(storiesFilePath);
@@ -131,6 +134,7 @@ app.post("/edit-story/:id", function (req, res) {
   } else {
     targetStory.genre = [newStoryGenreList];
   }
+  targetStory.imageurl = newStoryImageUrl;
   targetStory.storysummary = newStorySummary;
 
   //save it to JSON file

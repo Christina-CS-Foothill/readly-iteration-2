@@ -10,6 +10,8 @@
       rel="stylesheet">
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
+    <link rel="stylesheet" href="/styles/edit-story.css">
+
     <script>
       let goBack = function () {
         if (confirm("Are you sure? All data entered in this page will be discarded.")) {
@@ -42,6 +44,10 @@
                 <section class="genre-options">
                   <p>Genre (Choose at least 1)</p>
                   <ul>
+                    <li class="form-control-inline">
+                      <input type="checkbox" id="fantasy" name="genre" value="fantasy" />
+                      <label for="fantasy">Fantasy</label>
+                    </li>
                     <li class="form-control-inline">
                       <input type="checkbox" id="romance" name="genre" value="romance" />
                       <label for="romance">Romance</label>
@@ -84,6 +90,72 @@
                     </li>
                   </ul>
                 </section>
+                <li>
+                  <label for="imageurl">Story Image</label>
+                  <select id="imageurl" name="imageurl">
+                    <option value="/images/fantasy-cover.jpg">Fantasy Cover</option>
+                    <option value="/images/romance-cover.png">Romance Cover</option>
+                    <option value="/images/action-cover.png">Action Cover</option>
+                    <option value="/images/adventure-cover.png">Adventure Cover</option>
+                    <option value="/images/drama-cover.png">Drama Cover</option>
+                    <option value="/images/horror-cover.png">Horror Cover</option>
+                    <option value="/images/comedy-cover.png">Comedy Horror</option>
+                    <option value="/images/angst-cover.png">Angst Cover</option>
+                    <option value="/images/fanfiction-cover.png">Fanfiction Cover</option>
+                    <option value="/images/original-cover.png">Original Cover</option>
+                    <option value="/images/other-cover.png">Other Cover</option>
+                  </select>
+                </li>
+
+                <li id="image-previews">
+                  <label>Image Previews</label>
+                  <div>
+                    <article>
+                      <img src="/images/fantasy-cover.jpg">
+                      <p>Fantasy</p>
+                    </article>
+                    <article>
+                      <img src="/images/romance-cover.png">
+                      <p>Romance</p>
+                    </article>
+                    <article>
+                      <img src="/images/action-cover.png">
+                      <p>Action</p>
+                    </article>
+                    <article>
+                      <img src="/images/adventure-cover.png">
+                      <p>Adventure</p>
+                    </article>
+                    <article>
+                      <img src="/images/drama-cover.png">
+                      <p>Drama</p>
+                    </article>
+                    <article>
+                      <img src="/images/horror-cover.png">
+                      <p>Horror</p>
+                    </article>
+                    <article>
+                      <img src="/images/comedy-cover.png">
+                      <p>Comedy</p>
+                    </article>
+                    <article>
+                      <img src="/images/angst-cover.png">
+                      <p>Angst</p>
+                    </article>
+                    <article>
+                      <img src="/images/fanfiction-cover.png">
+                      <p>Fanfiction</p>
+                    </article>
+                    <article>
+                      <img src="/images/original-cover.png">
+                      <p>Original</p>
+                    </article>
+                    <article>
+                      <img src="/images/other-cover.png">
+                      <p>Other</p>
+                    </article>
+                  </div>
+                </li>
 
                 <li>
                   <label for="story-summary">Story Summary/Description</label>

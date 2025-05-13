@@ -5,7 +5,7 @@
     <title>📚 Readly.</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
-    <!-- <link rel="stylesheet" href="/styles/edit-story.css"> -->
+    <link rel="stylesheet" href="/styles/edit-story.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -42,7 +42,17 @@
               <p>Genre (Choose at least 1)</p>
               <ul>
                 <li class="form-control-inline">
-                  <% let isChecked=story.genre.includes("romance"); %>
+                  <% let isChecked=story.genre.includes("fantasy"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="fantasy" name="genre" value="fantasy" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="fantasy" name="genre" value="fantasy" />
+                        <% } %>
+                          <label for="fantasy">Fantasy</label>
+                </li>
+
+                <li class="form-control-inline">
+                  <% isChecked=story.genre.includes("romance"); %>
                     <% if(isChecked) { %>
                       <input type="checkbox" id="romance" name="genre" value="romance" checked />
                       <% } else { %>
@@ -133,6 +143,144 @@
                 </li>
               </ul>
             </section>
+
+            <li>
+              <label for="imageurl">Story Image</label>
+              <select id="imageurl" name="imageurl">
+                <% if( story.imageurl==="/images/fantasy-cover.jpg" ) { %>
+                  <option value="/images/fantasy-cover.jpg" selected="true">Fantasy Cover</option>
+                  <% } else { %>
+                    <option value="/images/fantasy-cover.jpg">Fantasy Cover</option>
+                    <% } %>
+
+                      <% if( story.imageurl==="/images/romance-cover.png" ) { %>
+                        <option value="/images/romance-cover.png" selected="true">Romance Cover</option>
+                        <% } else { %>
+                          <option value="/images/romance-cover.png">Romance Cover</option>
+                          <% } %>
+
+                            <% if( story.imageurl==="/images/action-cover.png" ) { %>
+                              <option value="/images/action-cover.png" selected="true">Action Cover</option>
+                              <% } else { %>
+                                <option value="/images/action-cover.png">Action Cover</option>
+                                <% } %>
+
+                                  <% if( story.imageurl==="/images/adventure-cover.png" ) { %>
+                                    <option value="/images/adventure-cover.png" selected="true">Adventure Cover</option>
+                                    <% } else { %>
+                                      <option value="/images/adventure-cover.png">Adventure Cover</option>
+                                      <% } %>
+
+                                        <% if( story.imageurl==="/images/drama-cover.png" ) { %>
+                                          <option value="/images/drama-cover.png" selected="true">Drama Cover</option>
+                                          <% } else { %>
+                                            <option value="/images/drama-cover.png">Drama Cover</option>
+                                            <% } %>
+
+                                              <% if( story.imageurl==="/images/horror-cover.png" ) { %>
+                                                <option value="/images/horror-cover.png" selected="true">Horror Cover
+                                                </option>
+                                                <% } else { %>
+                                                  <option value="/images/horror-cover.png">Horror Cover</option>
+                                                  <% } %>
+
+                                                    <% if( story.imageurl==="/images/comedy-cover.png" ) { %>
+                                                      <option value="/images/comedy-cover.png" selected="true">Comedy
+                                                        Cover</option>
+                                                      <% } else { %>
+                                                        <option value="/images/comedy-cover.png">Comedy Cover</option>
+                                                        <% } %>
+
+                                                          <% if( story.imageurl==="/images/angst-cover.png" ) { %>
+                                                            <option value="/images/angst-cover.png" selected="true">
+                                                              Angst Cover</option>
+                                                            <% } else { %>
+                                                              <option value="/images/angst-cover.png">Angst Cover
+                                                              </option>
+                                                              <% } %>
+
+                                                                <% if( story.imageurl==="/images/fanfiction-cover.png" )
+                                                                  { %>
+                                                                  <option value="/images/fanfiction-cover.png"
+                                                                    selected="true">Fanfiction Cover</option>
+                                                                  <% } else { %>
+                                                                    <option value="/images/fanfiction-cover.png">
+                                                                      Fanfiction Cover</option>
+                                                                    <% } %>
+
+                                                                      <% if(
+                                                                        story.imageurl==="/images/original-cover.png" )
+                                                                        { %>
+                                                                        <option value="/images/original-cover.png"
+                                                                          selected="true">Original Cover</option>
+                                                                        <% } else { %>
+                                                                          <option value="/images/original-cover.png">
+                                                                            Original Cover</option>
+                                                                          <% } %>
+
+                                                                            <% if(
+                                                                              story.imageurl==="/images/other-cover.png"
+                                                                              ) { %>
+                                                                              <option value="/images/other-cover.png"
+                                                                                selected="true">Other Cover</option>
+                                                                              <% } else { %>
+                                                                                <option value="/images/other-cover.png">
+                                                                                  Other Cover</option>
+                                                                                <% } %>
+
+
+              </select>
+            </li>
+
+            <li id="image-previews">
+              <label>Image Previews</label>
+              <div>
+                <article>
+                  <img src="/images/fantasy-cover.jpg">
+                  <p>Fantasy</p>
+                </article>
+                <article>
+                  <img src="/images/romance-cover.png">
+                  <p>Romance</p>
+                </article>
+                <article>
+                  <img src="/images/action-cover.png">
+                  <p>Action</p>
+                </article>
+                <article>
+                  <img src="/images/adventure-cover.png">
+                  <p>Adventure</p>
+                </article>
+                <article>
+                  <img src="/images/drama-cover.png">
+                  <p>Drama</p>
+                </article>
+                <article>
+                  <img src="/images/horror-cover.png">
+                  <p>Horror</p>
+                </article>
+                <article>
+                  <img src="/images/comedy-cover.png">
+                  <p>Comedy</p>
+                </article>
+                <article>
+                  <img src="/images/angst-cover.png">
+                  <p>Angst</p>
+                </article>
+                <article>
+                  <img src="/images/fanfiction-cover.png">
+                  <p>Fanfiction</p>
+                </article>
+                <article>
+                  <img src="/images/original-cover.png">
+                  <p>Original</p>
+                </article>
+                <article>
+                  <img src="/images/other-cover.png">
+                  <p>Other</p>
+                </article>
+              </div>
+            </li>
 
             <li>
               <label for="story-summary">Story Summary/Description</label>
