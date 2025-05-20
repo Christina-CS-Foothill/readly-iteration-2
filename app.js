@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const uuid = require("uuid");
 
+const storyData = require("./util/story-data");
+
 const app = express();
 
 app.set("views", path.join(__dirname, "views")); //for EJS
@@ -13,28 +15,12 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/", function (req, res) {
   //as soon as homepage/index loads, print list of users/authors and total list of stories to console
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const usersFilePath = path.join(__dirname, "data", "users.json");
 
-  const storiesFileData = fs.readFileSync(storiesFilePath);
+  const usersFilePath = path.join(__dirname, "data", "users.json");
   const usersFileData = fs.readFileSync(usersFilePath);
 
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
   const storedUsers = JSON.parse(usersFileData);
-
-  // for (const story of storedStories) {
-  //   const authorId = story.authorid;
-  //   console.log(authorId);
-  //   const author = storedUsers.find((user) => user.id === authorId);
-  //   console.log(author.username);
-  //   story.authorname = author.username;
-  //   story.imageurl = storyImageUrls[randomImageUrlIndex];
-  //   story.upvotecount = upvoteCount;
-  //   story.viewcount = viewCount;
-  //   randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
-  //   upvoteCount = Math.floor(Math.random() * 200);
-  //   viewCount = Math.floor(Math.random() * 2000);
-  // }
 
   // console.log("Stories: ");
   // console.log(storedStories);
@@ -55,14 +41,6 @@ app.post("/new-story", function (req, res) {
   newStory.id = uuid.v4();
   newStory.createdDate = new Date().toDateString();
 
-  //here, generate story image url, random view count and upvote count
-  // const storyImageUrls = [
-  //   "/images/fantasy-cover.jpg",
-  //   "/images/romance-cover.png",
-  //   "/images/adventure-cover.png",
-  // ];
-  // let randomImageUrlIndex = Math.floor(Math.random() * storyImageUrls.length);
-
   let upvoteCount = Math.floor(Math.random() * 200);
   let viewCount = Math.floor(Math.random() * 2000);
   //also, use the given authorId to fetch the authorName, save it to new story object
@@ -73,7 +51,6 @@ app.post("/new-story", function (req, res) {
 
   //add relevant data fields to new story obj
   newStory.authorname = user.username;
-  // newStory.imageurl = storyImageUrls[randomImageUrlIndex];
   newStory.upvotecount = upvoteCount;
   newStory.viewcount = viewCount;
 
@@ -83,14 +60,13 @@ app.post("/new-story", function (req, res) {
   }
 
   //retrieve saved list of stories
-  const filePath = path.join(__dirname, "data", "stories.json");
-  const fileData = fs.readFileSync(filePath);
-  const storedStories = JSON.parse(fileData);
+  const storedStories = storyData.getStoredStories();
 
   //add new story obj to saved list of stories
   console.log(newStory);
   storedStories.push(newStory);
-  fs.writeFileSync(filePath, JSON.stringify(storedStories));
+  //update story data/json file
+  storyData.storeStories(storedStories);
 
   res.redirect("/story/" + newStory.id);
 });
@@ -98,9 +74,7 @@ app.post("/new-story", function (req, res) {
 app.get("/edit-story/:id", function (req, res) {
   //here, display the story + the associated chapters
   const storyId = req.params.id;
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
 
   const targetStory = storedStories.find((story) => story.id === storyId);
 
@@ -121,9 +95,8 @@ app.post("/edit-story/:id", function (req, res) {
   const newStoryGenreList = req.body.genre;
   const newStoryImageUrl = req.body.imageurl;
   const newStorySummary = req.body.storysummary;
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+
+  const storedStories = storyData.getStoredStories();
 
   const targetStory = storedStories.find((story) => story.id === storyId);
 
@@ -138,7 +111,7 @@ app.post("/edit-story/:id", function (req, res) {
   targetStory.storysummary = newStorySummary;
 
   //save it to JSON file
-  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+  storyData.storeStories(storedStories);
 
   //then redirect to story page to see the changes
   res.redirect("/story/" + storyId);
@@ -147,9 +120,8 @@ app.post("/edit-story/:id", function (req, res) {
 app.get("/story/:id", function (req, res) {
   //here, display the story + the associated chapters
   const storyId = req.params.id;
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+
+  const storedStories = storyData.getStoredStories();
 
   const targetStory = storedStories.find((story) => story.id === storyId);
 
@@ -171,9 +143,7 @@ app.get("/delete-story/:id", function (req, res) {
   const storyId = req.params.id;
 
   //load all stories
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
 
   //load all chapters
   const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
@@ -214,7 +184,7 @@ app.get("/delete-story/:id", function (req, res) {
   // console.log(storedStories);
 
   //rewrite updated stories list to json
-  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+  storyData.storeStories(storedStories);
   //rewrite updated chapters list to json
   fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
 
@@ -224,9 +194,7 @@ app.get("/delete-story/:id", function (req, res) {
 
 app.get("/new-chapter/:id", function (req, res) {
   const storyId = req.params.id;
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
 
   const targetStory = storedStories.find((story) => story.id === storyId);
 
@@ -330,9 +298,7 @@ app.get("/user-profile/:id", function (req, res) {
   const usersFileData = fs.readFileSync(usersFilePath);
   const storedUsers = JSON.parse(usersFileData);
 
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
 
   const targetUser = storedUsers.find((user) => user.id === userId);
   const targetUserStories = storedStories.filter(
@@ -398,7 +364,14 @@ app.post("/edit-user/:id", function (req, res) {
   targetUser.username = req.body.username;
   targetUser.password = req.body.password;
   targetUser.userintro = req.body.userintro;
-  // console.log(targetUser);
+  targetUser.favoredGenres = req.body.favoredGenres;
+
+  //check if only one genre was selected
+  if (typeof targetUser.favoredGenres !== "object") {
+    targetUser.favoredGenres = [targetUser.favoredGenres];
+  }
+
+  console.log(targetUser);
 
   //write changes back to json file
   fs.writeFileSync(usersFilePath, JSON.stringify(storedUsers));
@@ -416,9 +389,7 @@ app.get("/delete-user/:id", function (req, res) {
   const storedUsers = JSON.parse(usersFileData);
 
   //load all stories
-  const storiesFilePath = path.join(__dirname, "data", "stories.json");
-  const storiesFileData = fs.readFileSync(storiesFilePath);
-  const storedStories = JSON.parse(storiesFileData);
+  const storedStories = storyData.getStoredStories();
 
   //load all chapters
   const chaptersFilePath = path.join(__dirname, "data", "chapters.json");
@@ -470,7 +441,7 @@ app.get("/delete-user/:id", function (req, res) {
 
   //write updated arrays back to JSON files
   fs.writeFileSync(chaptersFilePath, JSON.stringify(storedChapters));
-  fs.writeFileSync(storiesFilePath, JSON.stringify(storedStories));
+  storyData.storeStories(storedStories);
   fs.writeFileSync(usersFilePath, JSON.stringify(storedUsers));
 
   //redirect back to homepage

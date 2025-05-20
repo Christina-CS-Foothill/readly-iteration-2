@@ -23,7 +23,9 @@
       </p>
       <p>Favored genres:</p>
       <ul>
-        <li>???</li>
+        <% for(genre of user.favoredGenres) { %>
+          <li> <%- genre %></li>
+          <% } %>
       </ul>
     </div>
     <div class="follow-div">
