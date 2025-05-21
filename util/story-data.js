@@ -8,6 +8,13 @@ function getStoredStories() {
   return storedStories;
 }
 
+function deleteStory(storyId, storedStories) {
+  const targetIndex = storedStories.findIndex(
+    (storedStory) => storedStory.id === storyId
+  );
+  storedStories.splice(targetIndex, 1);
+}
+
 function storeStories(storeableStories) {
   fs.writeFileSync(storiesFilePath, JSON.stringify(storeableStories));
 }
@@ -16,4 +23,5 @@ function storeStories(storeableStories) {
 module.exports = {
   getStoredStories: getStoredStories,
   storeStories: storeStories,
+  deleteStory: deleteStory,
 };
