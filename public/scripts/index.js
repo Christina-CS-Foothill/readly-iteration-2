@@ -98,8 +98,8 @@ const authorListData = [
 ];
 
 // DOM elements
-const showStoriesBtn = document.getElementById("show-stories-btn");
-const showAuthorsBtn = document.getElementById("show-authors-btn");
+const showStoriesBtn = document.getElementById("stories-label");
+const showAuthorsBtn = document.getElementById("authors-label");
 const addNewStoryBtn = document.getElementById("add-new-story-btn");
 const addNewAuthorBtn = document.getElementById("add-new-author-btn");
 const storiesSectionElement = document.getElementById("story-list");
