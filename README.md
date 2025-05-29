@@ -1,8 +1,18 @@
 # readly-iteration-2
-This is my second try at creating a simple story sharing web application using html, css and javascript. May eventually convert to a React.JS web app.
+This is my second try at creating a simple story sharing web application using html, css and javascript/EJS. May eventually convert to a React.JS web app.
 
-###### Screenshot of App Homepage (in progress, simple interactivity added with JS)
-<img src="https://github.com/user-attachments/assets/d427880c-f4e4-47eb-b66f-78ca3b34e863" width="550">
+###### App Homepage (in progress, simple interactivity added with EJS)
+<img src="https://github.com/user-attachments/assets/70e0bc92-4987-48fe-9781-c2437ef64ad5" width="445">
+<img src="https://github.com/user-attachments/assets/78c91070-81ab-4463-a2a8-55ed87831e10" width="445">
 
-###### Screenshot of Create New Story page (in progress)
-<img src="https://github.com/user-attachments/assets/a208bd6c-fe84-4b35-9dfa-a14abd91c45a" width="550">
+###### Story Page
+<img src="https://github.com/user-attachments/assets/3aa45aa4-3dfe-4546-aca1-aec54baae1dd" width="700">
+
+###### Edit Story Page
+<img src="https://github.com/user-attachments/assets/419ca54d-7a5b-4eb3-b324-14458fc66fc0" width="700">
+
+###### Edit Chapter Page
+<img src="https://github.com/user-attachments/assets/4610542b-ecc3-4f47-be12-d2ec44959d5e" width="700">
+
+###### User Profile Page
+<img src="https://github.com/user-attachments/assets/c9bf19ba-386b-4f08-b154-9a5201695ef5" width="700">
