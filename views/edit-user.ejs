@@ -5,7 +5,8 @@
     <title>📚 Readly.</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/new-story.css">
-    <!-- <link rel="stylesheet" href="/styles/edit-chapter.css"> -->
+    <link rel="stylesheet" href="/styles/user-profile.css">
+    <link rel="stylesheet" href="/styles/edit-user.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -26,6 +27,27 @@
           passwordInput.type = "password";
         }
       }
+
+      let updateProfilePicValue = function (e) {
+        const imgElements = [document.getElementById("profile"), document.getElementById("female"), document.getElementById("male"), document.getElementById("flower")];
+        const imgInputElement = document.getElementById("profileImgUrl");
+        //add the selected class marker
+        if (!(e.classList.value).includes("selected")) {
+          e.classList.value = "selected";
+          // imgInputElement.value
+          // console.dir(e)
+          // console.dir(imgInputElement.value);
+          imgInputElement.value = e.getAttribute('src');
+        }
+        //take away "selected" from any other non-selected img element
+        for (img of imgElements) {
+          if (img.id !== e.id && img.classList.value.includes("selected")) {
+            img.classList.value = "";
+          }
+        }
+
+
+      }
     </script>
   </head>
 
@@ -40,6 +62,33 @@
             <li>
               <label for="username">User Name: </label>
               <input type="text" id="username" name="username" required value="<%= user.username %>">
+            </li>
+            <li id="profile-pic-options">
+              <label>User Profile Pic:</label>
+              <div>
+                <!-- use an invisible input element to store value of profile img -->
+                <input id="profileImgUrl" name="profileImgUrl" value="<%= user.profileImgUrl %>" type="text">
+                <article>
+                  <img class="selected" id="profile" src="/images/profile-images/default-profile-icon.jpg"
+                    onclick="updateProfilePicValue(this)">
+                  <label>Default</label>
+                </article>
+                <article>
+                  <img class="" id="female" src="/images/profile-images/female-default-profile-icon.jpg"
+                    onclick="updateProfilePicValue(this)">
+                  <label>Female</label>
+                </article>
+                <article>
+                  <img class="" id="male" src="/images/profile-images/male-default-profile-icon.jpg"
+                    onclick="updateProfilePicValue(this)">
+                  <label>Male</label>
+                </article>
+                <article>
+                  <img class="" id="flower" src="/images/profile-images/flower-default-profile-icon.jpg"
+                    onclick="updateProfilePicValue(this)">
+                  <label>Flower</label>
+                </article>
+              </div>
             </li>
             <li class="non-editable">
               <label>User ID:</label>
@@ -63,48 +112,104 @@
               <p> Favored Genres (Choose 3 Max)</p>
               <ul>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="fantasy" name="favoredGenres" value="fantasy" />
-                  <label for="fantasy">Fantasy</label>
+                  <% let isChecked=user.favoredGenres.includes("fantasy"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="fantasy" name="favoredGenres" value="fantasy" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="fantasy" name="favoredGenres" value="fantasy" />
+                        <% } %>
+                          <label for="fantasy">Fantasy</label>
+                </li>
+
+                <li class="form-control-inline">
+                  <% isChecked=user.favoredGenres.includes("romance"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="romance" name="favoredGenres" value="romance" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="romance" name="favoredGenres" value="romance" />
+                        <% } %>
+                          <label for="romance">Romance</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="romance" name="favoredGenres" value="romance" />
-                  <label for="romance">Romance</label>
+                  <% isChecked=user.favoredGenres.includes("action"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="action" name="favoredGenres" value="action" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="action" name="favoredGenres" value="action" />
+                        <% } %>
+                          <label for="action">Action</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="action" name="favoredGenres" value="action" />
-                  <label for="action">Action</label>
+                  <% isChecked=user.favoredGenres.includes("adventure"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="adventure" name="favoredGenres" value="adventure" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="adventure" name="favoredGenres" value="adventure" />
+                        <% } %>
+                          <label for="adventure">Adventure</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="adventure" name="favoredGenres" value="adventure" />
-                  <label for="adventure">Adventure</label>
+                  <% isChecked=user.favoredGenres.includes("drama"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="drama" name="favoredGenres" value="drama" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="drama" name="favoredGenres" value="drama" />
+                        <% } %>
+                          <label for="drama">Drama</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="drama" name="favoredGenres" value="drama" />
-                  <label for="drama">Drama</label>
+                  <% isChecked=user.favoredGenres.includes("horror"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="horror" name="favoredGenres" value="horror" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="horror" name="favoredGenres" value="horror" />
+                        <% } %>
+                          <label for="horror">Horror</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="horror" name="favoredGenres" value="horror" />
-                  <label for="horror">Horror</label>
+                  <% isChecked=user.favoredGenres.includes("comedy"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="comedy" name="favoredGenres" value="comedy" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="comedy" name="favoredGenres" value="comedy" />
+                        <% } %>
+                          <label for="comedy">Comedy</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="comedy" name="favoredGenres" value="comedy" />
-                  <label for="comedy">Comedy</label>
+                  <% isChecked=user.favoredGenres.includes("angst"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="angst" name="favoredGenres" value="angst" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="angst" name="favoredGenres" value="angst" />
+                        <% } %>
+                          <label for="angst">Angst</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="angst" name="favoredGenres" value="angst" />
-                  <label for="angst">Angst</label>
+                  <% isChecked=user.favoredGenres.includes("fanfiction"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="fanfiction" name="favoredGenres" value="fanfiction" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="fanfiction" name="favoredGenres" value="fanfiction" />
+                        <% } %>
+                          <label for="fanfiction">Fanfiction</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="fanfiction" name="favoredGenres" value="fanfiction" />
-                  <label for="fanfiction">Fanfiction</label>
+                  <% isChecked=user.favoredGenres.includes("original"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="original" name="favoredGenres" value="original" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="original" name="favoredGenres" value="original" />
+                        <% } %>
+                          <label>Original</label>
                 </li>
                 <li class="form-control-inline">
-                  <input type="checkbox" id="original" name="favoredGenres" value="original" />
-                  <label>Original</label>
-                </li>
-                <li class="form-control-inline">
-                  <input type="checkbox" id="other" name="favoredGenres" value="other" />
-                  <label for="other">Other</label>
+                  <% isChecked=user.favoredGenres.includes("other"); %>
+                    <% if(isChecked) { %>
+                      <input type="checkbox" id="other" name="favoredGenres" value="other" checked />
+                      <% } else { %>
+                        <input type="checkbox" id="other" name="favoredGenres" value="other" />
+                        <% } %>
+                          <label for="other">Other</label>
                 </li>
               </ul>
             </section>

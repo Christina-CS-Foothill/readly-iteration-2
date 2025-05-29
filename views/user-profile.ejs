@@ -43,6 +43,7 @@
                         </span>
                     </span>
                   </a>
+                  <img src="/images/profile-images/flower-default-profile-icon.jpg">
                   <div class="link-button">
                     <a href="/edit-user/<%= user.id %>">Edit User</a>
                     <a onclick="warnBeforeUserDeletion('<%= user.id %>')">Delete User</a>
@@ -64,14 +65,18 @@
                     </p>
                     <p>Favored genres:</p>
                     <ul>
-                      <li>Romance</li>
-                      <li>Drama</li>
-                      <li>Angst</li>
+                      <% for (const genre of user.favoredGenres) { %>
+                        <li>
+                          <%= genre %>
+                        </li>
+                        <% } %>
                     </ul>
                   </div>
                   <div class="follow-div">
-                    <p>Followers: 45</p>
-                    <p>Following: 154</p>
+                    <p>Followers: <%= user.followerCount %>
+                    </p>
+                    <p>Following: <%= user.followingCount %>
+                    </p>
                   </div>
                 </article>
               </li>

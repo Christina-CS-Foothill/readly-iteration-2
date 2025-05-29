@@ -1,0 +1,25 @@
+#profile-pic-options div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+img:hover {
+  box-shadow: 1px 1px 30px rgba(29, 80, 209, 0.5);
+}
+
+#profile-pic-options input {
+  display: none;
+  width: 1px;
+  height: 1px;
+}
+
+.selected {
+  height: 180px;
+  width: 180px;
+  box-shadow: 1px 1px 30px rgba(29, 80, 209, 0.5);
+}
+
+article label {
+  text-align: center;
+}

@@ -34,8 +34,19 @@ router.post("/create-user", function (req, res) {
   const newUser = req.body;
   const storedUsers = userData.getStoredUsers();
 
+  const followerCount = Math.floor(Math.random() * 300);
+  const followingCount = Math.floor(Math.random() * 150);
   const newId = uuid.v4();
+
+  newUser.followerCount = followerCount;
+  newUser.followingCount = followingCount;
   newUser.id = newId;
+
+  //check if only one genre was selected
+  if (typeof newUser.favoredGenres !== "object") {
+    newUser.favoredGenres = [newUser.favoredGenres];
+  }
+
   storedUsers.push(newUser);
   console.log(storedUsers);
 
