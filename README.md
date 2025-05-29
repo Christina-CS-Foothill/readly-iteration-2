@@ -1,7 +1,7 @@
 # readly-iteration-2
 This is my second try at creating a simple story sharing web application using html, css and javascript/EJS. May eventually convert to a React.JS web app.
 
-###### App Homepage (in progress, simple interactivity added with EJS)
+###### App Homepage, can toggle between displaying a list of stories or a list of authors/users
 <img src="https://github.com/user-attachments/assets/70e0bc92-4987-48fe-9781-c2437ef64ad5" width="445">
 <img src="https://github.com/user-attachments/assets/78c91070-81ab-4463-a2a8-55ed87831e10" width="445">
 
